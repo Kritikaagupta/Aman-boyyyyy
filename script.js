@@ -5,7 +5,16 @@ body {
   overflow: hidden;
 }
 
-/* center card */
+/* pages system */
+.box {
+  display: none;
+}
+
+.box.active {
+  display: block;
+}
+
+/* card */
 .card {
   position: absolute;
   top: 50%;
@@ -19,7 +28,7 @@ body {
   width: 320px;
 }
 
-/* headings */
+/* text */
 h1 {
   color: #ff4f81;
 }
@@ -28,7 +37,7 @@ h2 {
   color: #444;
 }
 
-/* button */
+/* buttons */
 button {
   margin-top: 15px;
   padding: 12px 20px;
@@ -43,10 +52,6 @@ button {
 
 button:hover {
   transform: scale(1.1);
-}
-
-.hidden {
-  display: none;
 }
 
 /* floating hearts */
@@ -65,7 +70,7 @@ button:hover {
   100% { transform: translateY(-10vh); }
 }
 
-/* confetti canvas */
+/* confetti */
 #confetti {
   position: fixed;
   width: 100%;
