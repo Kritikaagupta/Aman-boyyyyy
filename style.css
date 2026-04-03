@@ -1,45 +1,82 @@
-body {
-  margin: 0;
-  font-family: Arial;
-  text-align: center;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  color: white;
-  height: 100vh;
-  overflow: hidden;
+// typing effect
+let text = "Hey you 💖";
+let i = 0;
+
+function typeEffect() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 80);
+  }
+}
+typeEffect();
+
+// steps
+function nextStep() {
+  document.getElementById("step1").classList.add("hidden");
+  document.getElementById("step2").classList.remove("hidden");
 }
 
-.box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 400px;
+function nextStep2() {
+  document.getElementById("step2").classList.add("hidden");
+  document.getElementById("step3").classList.remove("hidden");
 }
 
-button {
-  padding: 12px 20px;
-  border: none;
-  background: white;
-  color: #ff4f81;
-  border-radius: 20px;
-  font-size: 16px;
-  cursor: pointer;
-  margin: 10px;
-  position: relative;
-  transition: 0.3s;
+// answers
+function rightAnswer() {
+  document.getElementById("step3").classList.add("hidden");
+  document.getElementById("step4").classList.remove("hidden");
+
+  document.getElementById("finalText").innerHTML =
+    "It was always you 💖<br><br>The most precious thing in my life is you.";
+
+  startConfetti();
 }
 
-button:hover {
-  transform: scale(1.1);
+function wrongAnswer() {
+  alert("Hmm… try again 🥺");
 }
 
-.hidden {
-  display: none;
-}
+// moving NO button
+const noBtn = document.getElementById("noBtn");
 
-#confetti {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.position = "absolute";
+  noBtn.style.top = Math.random() * 80 + "%";
+  noBtn.style.left = Math.random() * 80 + "%";
+});
+
+// confetti
+function startConfetti() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let pieces = [];
+
+  for (let i = 0; i < 120; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 6 + 2,
+      speed: Math.random() * 3 + 1
+    });
+  }
+
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ff4f81";
+
+    pieces.forEach(p => {
+      p.y += p.speed;
+      if (p.y > canvas.height) p.y = 0;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+    });
+
+    requestAnimationFrame(update);
+  }
+
+  update();
 }
