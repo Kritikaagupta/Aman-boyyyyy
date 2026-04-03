@@ -5,7 +5,7 @@ body {
   overflow: hidden;
 }
 
-/* page system */
+/* pages */
 .box { display: none; }
 .box.active { display: block; }
 
@@ -24,15 +24,7 @@ body {
   text-align: center;
   width: 360px;
 
-  box-shadow: 
-    0 20px 60px rgba(255, 105, 135, 0.15),
-    inset 0 0 0.5px rgba(255,255,255,0.6);
-}
-
-/* emoji */
-.emoji {
-  font-size: 28px;
-  margin-bottom: 10px;
+  box-shadow: 0 20px 60px rgba(255, 105, 135, 0.15);
 }
 
 /* text */
@@ -40,74 +32,26 @@ h1 {
   font-family: 'Playfair Display', serif;
   font-size: 40px;
   color: #e75480;
-  margin-bottom: 10px;
 }
 
 h2 {
-  font-size: 20px;
   color: #444;
-  font-weight: 400;
 }
 
 p {
   color: #777;
-  font-weight: 300;
 }
 
 /* buttons */
 button {
   margin-top: 20px;
   padding: 14px 28px;
-  border: none;
   border-radius: 40px;
+  border: none;
   background: linear-gradient(135deg, #ff6b9d, #ff8fab);
   color: white;
   font-size: 15px;
-  font-weight: 500;
   cursor: pointer;
 
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(255, 105, 135, 0.25);
-}
-
-button:hover {
-  transform: translateY(-2px) scale(1.05);
-}
-
-/* floating hearts */
-.hearts::before {
-  content: "💖 💕 💗 💘 💝";
-  position: absolute;
-  font-size: 20px;
-  width: 100%;
-  height: 100%;
-  animation: float 20s linear infinite;
-  opacity: 0.18;
-}
-
-@keyframes float {
-  0% { transform: translateY(100vh); }
-  100% { transform: translateY(-10vh); }
-}
-
-/* subtle heart floor */
-.heart-floor {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-  background: radial-gradient(circle at center, #ffb3c6 0%, transparent 70%);
-  opacity: 0.4;
-}
-
-/* canvas */
-#confetti {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-}
-
-#otherBtn {
-  transform: scale(0.85);
-  opacity: 0.8;
+  transition: all 0.2s ease;
 }
