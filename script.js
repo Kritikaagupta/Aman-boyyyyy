@@ -1,78 +1,126 @@
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #f8d7da;
-  overflow: hidden;
+// typing
+let text = "Hey you 💖";
+let i = 0;
+
+function typeEffect() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 80);
+  }
+}
+typeEffect();
+
+// page switch
+function showStep(stepId) {
+  document.querySelectorAll(".box").forEach(box => {
+    box.classList.remove("active");
+  });
+  document.getElementById(stepId).classList.add("active");
 }
 
-/* pages system */
-.box {
-  display: none;
+function nextStep() {
+  showStep("step2");
 }
 
-.box.active {
-  display: block;
+function nextStep2() {
+  showStep("step3");
 }
 
-/* card */
-.card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff0f3;
-  padding: 40px;
-  border-radius: 25px;
-  text-align: center;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-  width: 320px;
+// Aman grows 💖
+const amanBtn = document.getElementById("amanBtn");
+
+function chooseAman() {
+  let size = 16;
+
+  let grow = setInterval(() => {
+    size += 5;
+    amanBtn.style.fontSize = size + "px";
+
+    if (size > 60) {
+      clearInterval(grow);
+      showFinal();
+    }
+  }, 100);
 }
 
-/* text */
-h1 {
-  color: #ff4f81;
+// other runs 😂
+const otherBtn = document.getElementById("otherBtn");
+
+otherBtn.addEventListener("mouseover", () => {
+  otherBtn.style.position = "absolute";
+  otherBtn.style.top = Math.random() * 80 + "%";
+  otherBtn.style.left = Math.random() * 80 + "%";
+});
+
+// also make NO run
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.position = "absolute";
+  noBtn.style.top = Math.random() * 80 + "%";
+  noBtn.style.left = Math.random() * 80 + "%";
+});
+
+// final
+function showFinal() {
+  showStep("step4");
+
+  document.getElementById("finalText").innerHTML =
+    "It was always you 💖<br><br>The most precious thing in my life is you.";
+
+  startConfetti();
 }
 
-h2 {
-  color: #444;
-}
+// 💗 HEART CONFETTI
+function startConfetti() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
 
-/* buttons */
-button {
-  margin-top: 15px;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 25px;
-  background: linear-gradient(45deg, #ff4f81, #ff758c);
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-button:hover {
-  transform: scale(1.1);
-}
+  let hearts = [];
 
-/* floating hearts */
-.hearts::before {
-  content: "💖 💕 💗 💘 💝";
-  position: absolute;
-  font-size: 24px;
-  width: 100%;
-  height: 100%;
-  animation: float 10s linear infinite;
-  opacity: 0.4;
-}
+  for (let i = 0; i < 80; i++) {
+    hearts.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 20 + 10,
+      speed: Math.random() * 2 + 1,
+      opacity: Math.random()
+    });
+  }
 
-@keyframes float {
-  0% { transform: translateY(100vh); }
-  100% { transform: translateY(-10vh); }
-}
+  function drawHeart(x, y, size, opacity) {
+    ctx.globalAlpha = opacity;
+    ctx.fillStyle = "#ff4f81";
 
-/* confetti */
-#confetti {
-  position: fixed;
-  width: 100%;
-  height: 100%;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.bezierCurveTo(x - size / 2, y - size / 2, x - size, y + size / 3, x, y + size);
+    ctx.bezierCurveTo(x + size, y + size / 3, x + size / 2, y - size / 2, x, y);
+    ctx.fill();
+
+    ctx.globalAlpha = 1;
+  }
+
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    hearts.forEach(h => {
+      h.y += h.speed;
+
+      if (h.y > canvas.height) {
+        h.y = 0;
+        h.x = Math.random() * canvas.width;
+      }
+
+      drawHeart(h.x, h.y, h.size, h.opacity);
+    });
+
+    requestAnimationFrame(update);
+  }
+
+  update();
 }
