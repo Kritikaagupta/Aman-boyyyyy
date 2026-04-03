@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  background: white;
+  color: #ff4f81;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px;
+  position: relative;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.hidden {
+  display: none;
+}
+
+#confetti {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
