@@ -1,18 +1,13 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #f8d7da;
+  background: linear-gradient(135deg, #fbd3e9, #ffd1dc);
   overflow: hidden;
 }
 
-/* pages system */
-.box {
-  display: none;
-}
-
-.box.active {
-  display: block;
-}
+/* pages */
+.box { display: none; }
+.box.active { display: block; }
 
 /* card */
 .card {
@@ -20,16 +15,24 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #fff0f3;
-  padding: 40px;
-  border-radius: 25px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(20px);
+  padding: 50px;
+  border-radius: 30px;
   text-align: center;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-  width: 320px;
+  box-shadow: 0 15px 50px rgba(255,105,135,0.2);
+  width: 340px;
+}
+
+/* emoji */
+.emoji {
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 /* text */
 h1 {
+  font-family: 'Playfair Display', serif;
   color: #ff4f81;
 }
 
@@ -40,29 +43,30 @@ h2 {
 /* buttons */
 button {
   margin-top: 15px;
-  padding: 12px 20px;
+  padding: 14px 24px;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   background: linear-gradient(45deg, #ff4f81, #ff758c);
   color: white;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
+  box-shadow: 0 8px 20px rgba(255,79,129,0.3);
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform: scale(1.12);
 }
 
 /* floating hearts */
 .hearts::before {
-  content: "💖 💕 💗 💘 💝";
+  content: "💖 💕 💗 💘 💝 💓 💞 💘";
   position: absolute;
   font-size: 24px;
   width: 100%;
   height: 100%;
-  animation: float 10s linear infinite;
-  opacity: 0.4;
+  animation: float 18s linear infinite;
+  opacity: 0.3;
 }
 
 @keyframes float {
@@ -70,7 +74,29 @@ button:hover {
   100% { transform: translateY(-10vh); }
 }
 
-/* confetti */
+/* bottom heart floor 😭 */
+.heart-floor {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  background: url("https://i.imgur.com/6s9XH5b.png");
+  background-size: cover;
+}
+
+/* chat bubble */
+.bubble {
+  position: absolute;
+  right: 40px;
+  top: 80px;
+  background: rgba(255,255,255,0.8);
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* canvas */
 #confetti {
   position: fixed;
   width: 100%;
