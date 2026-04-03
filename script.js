@@ -1,5 +1,5 @@
-// typing
-let text = "Hey you 💖";
+// typing effect
+let text = "Hey Dora 💖";
 let i = 0;
 
 function typeEffect() {
@@ -11,7 +11,7 @@ function typeEffect() {
 }
 typeEffect();
 
-// page switch
+// page switching
 function showStep(stepId) {
   document.querySelectorAll(".box").forEach(b => b.classList.remove("active"));
   document.getElementById(stepId).classList.add("active");
@@ -20,7 +20,7 @@ function showStep(stepId) {
 function nextStep() { showStep("step2"); }
 function nextStep2() { showStep("step3"); }
 
-// Aman grows 💖
+// Aman grows
 const amanBtn = document.getElementById("amanBtn");
 
 function chooseAman() {
@@ -37,7 +37,7 @@ function chooseAman() {
   }, 100);
 }
 
-// run buttons 😂
+// run away buttons
 const otherBtn = document.getElementById("otherBtn");
 const noBtn = document.getElementById("noBtn");
 
@@ -49,7 +49,7 @@ const noBtn = document.getElementById("noBtn");
   });
 });
 
-// final
+// final message
 function showFinal() {
   showStep("step4");
 
@@ -59,7 +59,7 @@ function showFinal() {
   startConfetti();
 }
 
-// 💗 smooth heart confetti
+// smooth heart confetti
 function startConfetti() {
   const canvas = document.getElementById("confetti");
   const ctx = canvas.getContext("2d");
@@ -69,18 +69,19 @@ function startConfetti() {
 
   let hearts = [];
 
-  for (let i = 0; i < 120; i++) {
+  for (let i = 0; i < 90; i++) {
     hearts.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: Math.random() * 15 + 8,
-      speed: Math.random() * 1.5 + 0.5,
+      size: Math.random() * 12 + 6,
+      speed: Math.random() * 1 + 0.3,
+      drift: Math.random() * 0.5,
       angle: Math.random() * Math.PI
     });
   }
 
   function drawHeart(x, y, size) {
-    ctx.fillStyle = "#ff4f81";
+    ctx.fillStyle = "#ff6b9d";
     ctx.beginPath();
     ctx.moveTo(x, y);
     ctx.bezierCurveTo(x - size/2, y - size/2, x - size, y + size/3, x, y + size);
@@ -93,8 +94,8 @@ function startConfetti() {
 
     hearts.forEach(h => {
       h.y += h.speed;
-      h.angle += 0.02;
-      h.x += Math.sin(h.angle) * 0.5;
+      h.angle += 0.01;
+      h.x += Math.sin(h.angle) * h.drift;
 
       if (h.y > canvas.height) {
         h.y = -10;
