@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For You 💖</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      text-align: center;
+      font-family: Arial;
+      color: white;
+      margin-top: 100px;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      background: white;
+      color: #ff4f81;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Hey you 🎂</h1>
+  <p>I made something for you...</p>
+
+  <button onclick="showMessage()">Click me</button>
+
+  <h2 id="msg"></h2>
+
+  <script>
+    function showMessage() {
+      document.getElementById("msg").innerHTML = "Happy Birthday ❤️";
+    }
+  </script>
+
+</body>
+</html>
