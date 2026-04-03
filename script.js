@@ -1,5 +1,5 @@
 // typing effect
-let text = "Hey Dora 💖";
+let text = "Hey Oldie 💖";
 let i = 0;
 
 function typeEffect() {
@@ -20,7 +20,7 @@ function showStep(stepId) {
 function nextStep() { showStep("step2"); }
 function nextStep2() { showStep("step3"); }
 
-// Aman grows
+// Aman grows 💖
 const amanBtn = document.getElementById("amanBtn");
 
 function chooseAman() {
@@ -37,7 +37,7 @@ function chooseAman() {
   }, 100);
 }
 
-// run away buttons
+// buttons run 😂
 const otherBtn = document.getElementById("otherBtn");
 const noBtn = document.getElementById("noBtn");
 
@@ -59,7 +59,7 @@ function showFinal() {
   startConfetti();
 }
 
-// smooth heart confetti
+// smooth heart confetti 💗
 function startConfetti() {
   const canvas = document.getElementById("confetti");
   const ctx = canvas.getContext("2d");
