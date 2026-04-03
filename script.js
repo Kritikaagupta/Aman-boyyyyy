@@ -1,4 +1,4 @@
-// typing effect
+// typing
 let text = "Hey you 💖";
 let i = 0;
 
@@ -11,7 +11,7 @@ function typeEffect() {
 }
 typeEffect();
 
-// page switching
+// page switch
 function showStep(stepId) {
   document.querySelectorAll(".box").forEach(b => b.classList.remove("active"));
   document.getElementById(stepId).classList.add("active");
@@ -20,34 +20,40 @@ function showStep(stepId) {
 function nextStep() { showStep("step2"); }
 function nextStep2() { showStep("step3"); }
 
-// Aman grows 💖
-const amanBtn = document.getElementById("amanBtn");
+// Aman grows + other shrinks smoothly 😭💖
+const aman = document.getElementById("amanBtn");
+const other = document.getElementById("otherBtn");
 
-function chooseAman() {
-  let size = 16;
+let amanSize = 1;
+let otherSize = 1;
 
-  let grow = setInterval(() => {
-    size += 5;
-    amanBtn.style.fontSize = size + "px";
+document.addEventListener("mousemove", () => {
 
-    if (size > 65) {
-      clearInterval(grow);
-      showFinal();
-    }
-  }, 100);
-}
+  if (amanSize < 1.8) {
+    amanSize += 0.01;
+    aman.style.transform = `scale(${amanSize})`;
+  }
 
-// buttons run 😂
-const otherBtn = document.getElementById("otherBtn");
+  if (otherSize > 0.5) {
+    otherSize -= 0.01;
+    other.style.transform = `scale(${otherSize})`;
+  }
+
+});
+
+// running buttons 😂
 const noBtn = document.getElementById("noBtn");
 
-[otherBtn, noBtn].forEach(btn => {
-  btn.addEventListener("mouseover", () => {
-    btn.style.position = "absolute";
-    btn.style.top = Math.random() * 80 + "%";
-    btn.style.left = Math.random() * 80 + "%";
-  });
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.position = "absolute";
+  noBtn.style.top = Math.random() * 80 + "%";
+  noBtn.style.left = Math.random() * 80 + "%";
 });
+
+// Aman click
+function chooseAman() {
+  showFinal();
+}
 
 // final message
 function showFinal() {
@@ -69,13 +75,12 @@ function startConfetti() {
 
   let hearts = [];
 
-  for (let i = 0; i < 90; i++) {
+  for (let i = 0; i < 80; i++) {
     hearts.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * 12 + 6,
       speed: Math.random() * 1 + 0.3,
-      drift: Math.random() * 0.5,
       angle: Math.random() * Math.PI
     });
   }
@@ -95,7 +100,7 @@ function startConfetti() {
     hearts.forEach(h => {
       h.y += h.speed;
       h.angle += 0.01;
-      h.x += Math.sin(h.angle) * h.drift;
+      h.x += Math.sin(h.angle) * 0.5;
 
       if (h.y > canvas.height) {
         h.y = -10;
