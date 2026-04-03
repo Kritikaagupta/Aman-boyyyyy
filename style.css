@@ -106,3 +106,8 @@ button:hover {
   width: 100%;
   height: 100%;
 }
+
+#otherBtn {
+  transform: scale(0.85);
+  opacity: 0.8;
+}
