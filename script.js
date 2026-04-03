@@ -1,5 +1,5 @@
 // typing effect
-let text = "Hey Oldie 💖";
+let text = "Hey you 💖";
 let i = 0;
 
 function typeEffect() {
