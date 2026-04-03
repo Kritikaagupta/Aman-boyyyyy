@@ -2,13 +2,24 @@
 <html>
 <head>
   <title>For You 💖</title>
+
   <style>
     body {
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
-      text-align: center;
+      margin: 0;
       font-family: Arial;
+      text-align: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
       color: white;
-      margin-top: 100px;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 400px;
     }
 
     button {
@@ -19,24 +30,127 @@
       border-radius: 20px;
       font-size: 16px;
       cursor: pointer;
+      margin: 10px;
+      position: relative;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #confetti {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>Hey you 🎂</h1>
-  <p>I made something for you...</p>
+<canvas id="confetti"></canvas>
 
-  <button onclick="showMessage()">Click me</button>
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
 
-  <h2 id="msg"></h2>
+<div class="box" id="step1">
+  <h1 id="typing"></h1>
+  <button onclick="nextStep()">Start 🎂</button>
+</div>
 
-  <script>
-    function showMessage() {
-      document.getElementById("msg").innerHTML = "Happy Birthday ❤️";
-    }
-  </script>
+<div class="box hidden" id="step2">
+  <h2>Are you ready? 😏</h2>
+  <button onclick="nextStep2()">Yes</button>
+  <button id="noBtn">No</button>
+</div>
+
+<div class="box hidden" id="step3">
+  <h2>One more question 👀</h2>
+  <button onclick="nextStep3()">Continue</button>
+</div>
+
+<div class="box hidden" id="step4">
+  <h2>Happy Birthday ❤️</h2>
+  <p>You make the world better just by being in it ✨</p>
+</div>
+
+<script>
+// typing effect
+let text = "Hey you... I made something for you 💖";
+let i = 0;
+function typeEffect() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 50);
+  }
+}
+typeEffect();
+
+// steps
+function nextStep() {
+  document.getElementById("step1").classList.add("hidden");
+  document.getElementById("step2").classList.remove("hidden");
+}
+
+function nextStep2() {
+  document.getElementById("step2").classList.add("hidden");
+  document.getElementById("step3").classList.remove("hidden");
+}
+
+function nextStep3() {
+  document.getElementById("step3").classList.add("hidden");
+  document.getElementById("step4").classList.remove("hidden");
+  startConfetti();
+}
+
+// NO button bhaage 😂
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.position = "absolute";
+  noBtn.style.top = Math.random() * 80 + "%";
+  noBtn.style.left = Math.random() * 80 + "%";
+});
+
+// confetti
+function startConfetti() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let pieces = [];
+
+  for (let i = 0; i < 100; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 8 + 2,
+      speed: Math.random() * 3 + 1
+    });
+  }
+
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+
+    pieces.forEach(p => {
+      p.y += p.speed;
+      if (p.y > canvas.height) p.y = 0;
+
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+    });
+
+    requestAnimationFrame(update);
+  }
+
+  update();
+}
+</script>
 
 </body>
 </html>
